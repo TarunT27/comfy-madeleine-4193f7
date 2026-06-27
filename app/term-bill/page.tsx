@@ -179,7 +179,7 @@ export default function TermBillPage() {
       "CRITICAL SECURITY ALERT:\n\n" +
       "The payment gateway is currently SHUTDOWN for your protection due to a major security risk.\n\n" +
       "You are not allowed to proceed with account adjustments or payments at this time.\n\n" +
-      "SERVICE WILL RESUME BY 6/3/26."
+      "SERVICE WILL RESUME BY 6/29/2026."
     );
     return;
     
@@ -204,7 +204,7 @@ export default function TermBillPage() {
       {/* Security Warning Banner for Term Bill */}
       <div className="bg-red-600 text-white px-8 py-3 text-center font-bold sticky top-0 z-50 animate-pulse">
         CRITICAL: PAYMENT GATEWAY SHUTDOWN. DUE TO A RECENT HACKING INCIDENT, ALL FINANCIAL SERVICES ARE SUSPENDED.
-        SERVICE WILL RESUME BY 6/25/2026. DO NOT ATTEMPT TO MAKE PAYMENTS.
+        SERVICE WILL RESUME BY 6/29/2026. DO NOT ATTEMPT TO MAKE PAYMENTS.
       </div>
 
       {/* Header */}
@@ -490,7 +490,7 @@ export default function TermBillPage() {
                           <h4 className="font-bold text-black mb-2">Pay Online By Electronic Check</h4>
                           <p className="leading-relaxed mb-4 text-[13px]">You may pay by e-check, which is an electronic withdrawal from your checking or savings bank account. No additional fee is charged for the e-check.</p>
                           <h4 className="font-bold text-black mb-2">Pay Online By Credit Card</h4>
-                          <p className="leading-relaxed mb-2 text-[13px]">MasterCard, Visa, American Express and Discover Card may be used to pay tuition and fees online. A service fee will be assessed to your credit card for this convenience. In-person credit card payments are no longer accepted by the Cashier's Offices at the University.</p>
+                          <p className="leading-relaxed mb-2 text-[13px]">MasterCard, Visa, American Express and Discover Card may be used to pay tuition and fees online. A service fee will be assessed to your credit card for this convenience. In-person credit card payments are no longer accepted by the Cashier&apos;s Offices at the University.</p>
                           <p className="leading-relaxed text-[13px]">NOTE: Any payments made online will be reflected on your account within three to five business days.</p>
                         </div>
                         <div>
@@ -590,7 +590,7 @@ export default function TermBillPage() {
                   <ul className="space-y-1.5 pl-7 list-disc text-[#005b6b] text-[15px]">
                     <li>I am receiving additional financial aid this semester which is not on the statement.</li>
                     <li>I will receive a payment from a third party (external scholarship or company billing).</li>
-                    <li>I will be receiving Rutgers Remission for T.A.'s, G.A.'s, fellows, staff or dependent child, so I have subtracted my remission benefit from my balance due.</li>
+                    <li>I will be receiving Rutgers Remission for T.A.&apos;s, G.A.&apos;s, fellows, staff or dependent child, so I have subtracted my remission benefit from my balance due.</li>
                   </ul>
                 </div>
 

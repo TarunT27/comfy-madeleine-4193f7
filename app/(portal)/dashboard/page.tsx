@@ -116,7 +116,7 @@ export default function DashboardPage() {
               account adjustments have been <strong>temporarily revoked</strong>.
             </p>
             <p className="mt-2 font-bold text-red-700 underline">
-              DO NOT MAKE ANY NEW PAYMENTS. New payments and changes are put on pause until 6/25/2026
+              DO NOT MAKE ANY NEW PAYMENTS. New payments and changes are put on pause until 6/29/2026
               due to a high security risk.
             </p>
             <div className="mt-3 flex gap-4">
