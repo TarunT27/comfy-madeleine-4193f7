@@ -1,5 +1,12 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { useEffect } from "react";
+import { withBasePath } from "@/lib/routes";
 
 export default function Home() {
-  redirect("/dashboard");
+  useEffect(() => {
+    window.location.replace(withBasePath("/dashboard"));
+  }, []);
+
+  return <main className="min-h-screen bg-slate-100" />;
 }
