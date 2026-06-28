@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useFetch } from "@/lib/useFetch";
 import { usePortalStore } from "@/lib/store";
 import { Dialog } from "@/app/components/ui/dialog";
+import { navigateTo } from "@/lib/routes";
 
 export default function SearchPage() {
   const { demoData } = usePortalStore();
@@ -28,7 +29,7 @@ export default function SearchPage() {
       <div className="card">
         {q ? (
           results.length ? (
-            <ul className="space-y-2">{results.map((r, i) => <li key={`${r.type}-${i}`}><button className="text-left" onClick={() => setDetail(`${r.type}: ${r.label}`)}>{r.type}: {r.label}</button> <button className="ml-2 text-rutgers" onClick={() => (window.location.href = r.route)}>Open</button></li>)}</ul>
+            <ul className="space-y-2">{results.map((r, i) => <li key={`${r.type}-${i}`}><button className="text-left" onClick={() => setDetail(`${r.type}: ${r.label}`)}>{r.type}: {r.label}</button> <button className="ml-2 text-rutgers" onClick={() => navigateTo(r.route)}>Open</button></li>)}</ul>
           ) : (
             <p>No results.</p>
           )

@@ -6,6 +6,7 @@ import { usePortalStore } from "@/lib/store";
 import { Tabs } from "@/app/components/ui/tabs";
 import { Select } from "@/app/components/ui/select";
 import { Dialog } from "@/app/components/ui/dialog";
+import { navigateTo } from "@/lib/routes";
 import { NotificationItem } from "@/types/models";
 
 export default function NotificationsPage() {
@@ -48,7 +49,7 @@ export default function NotificationsPage() {
         {selected && !selected.read && (
           <button className="mb-2 block text-rutgers" onClick={() => markRead(selected.id)}>Mark as read</button>
         )}
-        <button className="text-rutgers" onClick={() => (window.location.href = selected?.route ?? "/dashboard")}>Go to related page</button>
+        <button className="text-rutgers" onClick={() => navigateTo(selected?.route ?? "/dashboard")}>Go to related page</button>
       </Dialog>
     </div>
   );

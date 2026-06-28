@@ -7,6 +7,7 @@ import { Tabs } from "@/app/components/ui/tabs";
 import { Dialog } from "@/app/components/ui/dialog";
 import { Button } from "@/app/components/ui/button";
 import { useToast } from "@/app/components/ui/toast";
+import { navigateTo } from "@/lib/routes";
 
 type Award = { id: string; name: string; amount: number; status: string };
 
@@ -115,7 +116,7 @@ export default function FinancialAidPage() {
           >
             Download Award Summary CSV
           </Button>
-          <Button variant="outline" onClick={() => (window.location.href = "/financial-aid?tab=docs")}>View docs needed</Button>
+          <Button variant="outline" onClick={() => navigateTo("/financial-aid?tab=docs")}>View docs needed</Button>
         </div>
       </Dialog>
     </div>

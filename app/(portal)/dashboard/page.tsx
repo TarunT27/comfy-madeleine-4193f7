@@ -11,6 +11,7 @@ import { Select } from "@/app/components/ui/select";
 import { Button } from "@/app/components/ui/button";
 import { Table } from "@/app/components/ui/table";
 import { useToast } from "@/app/components/ui/toast";
+import { navigateTo, openPath } from "@/lib/routes";
 import { GradeItem, NotificationItem } from "@/types/models";
 
 type User = {
@@ -160,9 +161,9 @@ export default function DashboardPage() {
                 key={label}
                 className="rounded border p-2 hover:bg-slate-50"
                 onClick={() => {
-                  if (key === "id-card") return (window.location.href = "/profile/id-card");
-                  if (key === "health") return (window.location.href = "/help#health");
-                  if (key === "wellness") return (window.location.href = "/help#wellness");
+                  if (key === "id-card") return navigateTo("/profile/id-card");
+                  if (key === "health") return navigateTo("/help#health");
+                  if (key === "wellness") return navigateTo("/help#wellness");
                   setModal(key);
                 }}
               >
@@ -183,7 +184,7 @@ export default function DashboardPage() {
                 </p>
                 <p className="mt-1 text-xs text-slate-500">Due: Spring 2026 Term</p>
               </div>
-              <Button variant="outline" className="w-full" onClick={() => { window.location.href = "/term-bill"; }}>
+              <Button variant="outline" className="w-full" onClick={() => navigateTo("/term-bill")}>
                 View Full Term Bill
               </Button>
             </>
@@ -296,7 +297,7 @@ export default function DashboardPage() {
           ) : (
             <p className="text-slate-500">No records for this tab.</p>
           )}
-          <Button variant="outline" onClick={() => (window.location.href = "/financial-aid")}>Open Financial Aid Page</Button>
+          <Button variant="outline" onClick={() => navigateTo("/financial-aid")}>Open Financial Aid Page</Button>
         </article>
       </div>
 
@@ -315,7 +316,7 @@ export default function DashboardPage() {
       ))}
       <Dialog open={modal === "notification-detail"} onClose={() => setModal(null)} title="Notification Detail">
         <p>{selectedNotification?.message}</p>
-        <Button onClick={() => (window.location.href = selectedNotification?.route ?? "/notifications")}>Go to related page</Button>
+        <Button onClick={() => navigateTo(selectedNotification?.route ?? "/notifications")}>Go to related page</Button>
       </Dialog>
       <Dialog open={modal === "activity-detail"} onClose={() => setModal(null)} title="Activity Detail"><p>Assignment detail modal. <Link href="/courses">View Full Page</Link></p></Dialog>
       <Dialog open={modal === "absence"} onClose={() => setModal(null)} title="Self Reporting Absence">
@@ -336,7 +337,7 @@ export default function DashboardPage() {
           <tbody>{allGrades.map((g) => <tr key={g.id}><td className="border p-2">{g.course}</td><td className="border p-2">{g.grade}</td><td className="border p-2">{g.credits}</td><td className="border p-2">{g.term}</td></tr>)}</tbody>
         </Table>
         <div className="mt-3 flex gap-2">
-          <Button variant="outline" onClick={() => window.open("/print/transcript", "_blank")}>Open Printable View</Button>
+          <Button variant="outline" onClick={() => openPath("/print/transcript")}>Open Printable View</Button>
           <Button variant="outline" onClick={() => exportCsv("transcript.txt", ["Course", "Grade", "Credits", "Term"], allGrades.map((g) => [g.course, g.grade, String(g.credits), g.term]))}>Download PDF (Placeholder)</Button>
           <Button variant="outline" onClick={() => setModal(null)}>Close</Button>
         </div>
@@ -353,7 +354,7 @@ export default function DashboardPage() {
         <ul className="mb-2 list-disc pl-6 text-sm">{(aidData?.awards ?? []).map((a) => <li key={a.id}>{a.name} - ${a.amount}</li>)}</ul>
         <div className="flex gap-2">
           <Button variant="outline" onClick={() => exportCsv("award-summary.csv", ["Award", "Amount", "Status"], (aidData?.awards ?? []).map((a) => [a.name, String(a.amount), a.status]))}>Download Award Summary CSV</Button>
-          <Button variant="outline" onClick={() => (window.location.href = "/financial-aid?tab=docs")}>View docs needed</Button>
+          <Button variant="outline" onClick={() => navigateTo("/financial-aid?tab=docs")}>View docs needed</Button>
         </div>
       </Dialog>
     </div>
