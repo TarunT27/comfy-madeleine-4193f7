@@ -179,7 +179,7 @@ export default function TermBillPage() {
       "CRITICAL SECURITY ALERT:\n\n" +
       "The payment gateway is currently SHUTDOWN for your protection due to a major security risk.\n\n" +
       "You are not allowed to proceed with account adjustments or payments at this time.\n\n" +
-      "SERVICE WILL RESUME BY JULY 5, 2026."
+      "SERVICE WILL RESUME BY JULY 24, 2026."
     );
     return;
     
@@ -204,7 +204,7 @@ export default function TermBillPage() {
       {/* Security Warning Banner for Term Bill */}
       <div className="bg-red-600 text-white px-8 py-3 text-center font-bold sticky top-0 z-50 animate-pulse">
         CRITICAL: PAYMENT GATEWAY SHUTDOWN. DUE TO A RECENT HACKING INCIDENT, ALL FINANCIAL SERVICES ARE SUSPENDED.
-        SERVICE WILL RESUME BY JULY 5, 2026. DO NOT ATTEMPT TO MAKE PAYMENTS.
+        SERVICE WILL RESUME BY JULY 24, 2026. DO NOT ATTEMPT TO MAKE PAYMENTS.
       </div>
 
       {/* Header */}
