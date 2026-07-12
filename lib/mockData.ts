@@ -29,8 +29,8 @@ export const schedules: CourseScheduleItem[] = [
   { id: "f27-8", course: "LINUX SYS PROGRAMING", title: "LINUX SYS PROGRAMING", day: "Thursday", time: "10:30 AM - 12:00 PM", location: "Livingston Campus", term: "Fall 2027" },
   { id: "f27-9", course: "NUM ANALYSES", title: "NUM ANALYSES", day: "Tuesday", time: "12:00 PM - 1:30 PM", location: "Busch Campus", term: "Fall 2027" },
   { id: "f27-10", course: "NUM ANALYSES", title: "NUM ANALYSES", day: "Thursday", time: "12:00 PM - 1:30 PM", location: "Busch Campus", term: "Fall 2027" },
-  { id: "s27-1", course: "PROBABILITY & STATISTICS", title: "Probability & Statistics", day: "Hours by arrangement", time: "TBD", location: "Newark Campus", term: "Summer 2027" },
-  { id: "s27-2", course: "NUMERICAL ANALYSIS", title: "Numerical Analysis", day: "Hours by arrangement", time: "TBD", location: "Newark Campus", term: "Summer 2027" }
+  { id: "s27-1", course: "GOVT&POL LATIN AMER", title: "GOVT&POL LATIN AMER", day: "Hours by arrangement", time: "TBD", location: "Newark Campus", term: "Summer 2027" },
+  { id: "s27-2", course: "Arab Studies", title: "Arab Studies", day: "Hours by arrangement", time: "TBD", location: "Newark Campus", term: "Summer 2027" }
 ];
 
 export const activities: ActivityItem[] = [
