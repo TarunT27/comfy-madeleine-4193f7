@@ -97,7 +97,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <p className="font-bold mb-2">Important Security Warning</p>
             <p>
               Please be advised that all payments recently made for tuition, along with any adjustments or changes, 
-              have been <strong>revoked</strong> and will be put on <strong>pause until July 24, 2026</strong>.
+              have been <strong>revoked</strong> and will be put on <strong>pause until August 7, 2026</strong>.
             </p>
             <p className="mt-2 text-sm">
               <strong>WARNING: Do not make any new payments at this time.</strong> There is a significant security risk 
