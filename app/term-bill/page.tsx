@@ -174,16 +174,7 @@ export default function TermBillPage() {
   ];
 
   const handleContinue = () => {
-    // Blocked due to hacking incident
-    alert(
-      "CRITICAL SECURITY ALERT:\n\n" +
-      "The payment gateway is currently SHUTDOWN for your protection due to a major security risk.\n\n" +
-      "You are not allowed to proceed with account adjustments or payments at this time.\n\n" +
-      "SERVICE WILL RESUME BY AUGUST 15, 2026."
-    );
-    return;
-    
-    // If we have data for it, use it. Otherwise use a fallback to let us "figure it out".
+    // Use the selected term data when available, with a safe fallback for other terms.
     const data = termDataData[semester] || {
       termTitle: semester.replace(" - ", " "),
       dueDate: "TBD",
@@ -201,10 +192,9 @@ export default function TermBillPage() {
 
   return (
     <div className="min-h-screen bg-[#f3f3f3] font-sans">
-      {/* Security Warning Banner for Term Bill */}
-      <div className="bg-red-600 text-white px-8 py-3 text-center font-bold sticky top-0 z-50 animate-pulse">
-        CRITICAL: PAYMENT GATEWAY SHUTDOWN. DUE TO A RECENT HACKING INCIDENT, ALL FINANCIAL SERVICES ARE SUSPENDED.
-        SERVICE WILL RESUME BY AUGUST 15, 2026. DO NOT ATTEMPT TO MAKE PAYMENTS.
+      {/* Service status banner for Term Bill */}
+      <div className="sticky top-0 z-50 bg-amber-600 px-8 py-3 text-center font-bold text-white">
+        SERVICE NOTICE: Some dashboard features may be temporarily unavailable or may not display correctly while maintenance is completed. The payment gateway is fully operational.
       </div>
 
       {/* Header */}

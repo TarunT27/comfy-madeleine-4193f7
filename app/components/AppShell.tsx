@@ -91,21 +91,15 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </div>
 
-      <Dialog open={warningOpen} onClose={() => setWarningOpen(false)} title="Security Alert: Hacking Incident">
+      <Dialog open={warningOpen} onClose={() => setWarningOpen(false)} title="Service Notice">
         <div className="space-y-4">
-          <div className="rounded-lg bg-red-50 p-4 text-red-900 border border-red-200">
-            <p className="font-bold mb-2">Important Security Warning</p>
+          <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-950">
+            <p className="mb-2 font-bold">Dashboard availability notice</p>
             <p>
-              Please be advised that all payments recently made for tuition, along with any adjustments or changes, 
-              have been <strong>revoked</strong> and will be put on <strong>pause until August 15, 2026</strong>.
+              Some dashboard features may be temporarily unavailable or may not display correctly while maintenance is completed.
             </p>
             <p className="mt-2 text-sm">
-              <strong>WARNING: Do not make any new payments at this time.</strong> There is a significant security risk 
-              at the moment, and our payment gateways are currently suspended for your protection.
-            </p>
-            <p className="mt-2 text-sm italic">
-              This action is a precautionary measure in response to a recent hacking incident. We are working 
-              diligently to resolve the situation and ensure the security of all financial transactions.
+              <strong>The payment gateway is fully operational.</strong> You may continue to make payments and manage your account as usual.
             </p>
           </div>
           <div className="flex justify-end">

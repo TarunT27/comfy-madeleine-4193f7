@@ -105,24 +105,22 @@ export default function DashboardPage() {
     <div>
       <h1 className="mb-4 text-4xl font-bold">My Dashboard</h1>
       
-      <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 shadow-sm">
+      <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 shadow-sm">
         <div className="flex items-start gap-4">
-          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-red-100 text-red-600">
+          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-amber-100 text-amber-700">
             <span className="text-xl font-bold">!</span>
           </div>
           <div>
-            <h3 className="text-lg font-bold text-red-900">Urgent: Financial System Status</h3>
-            <p className="mt-1 text-red-800">
-              A recent security incident has affected our financial systems. All recent tuition payments and 
-              account adjustments have been <strong>temporarily revoked</strong>.
+            <h3 className="text-lg font-bold text-amber-950">Dashboard service notice</h3>
+            <p className="mt-1 text-amber-900">
+              Some dashboard features may be temporarily unavailable or may not display correctly while maintenance is completed.
             </p>
-            <p className="mt-2 font-bold text-red-700 underline">
-              DO NOT MAKE ANY NEW PAYMENTS. New payments and changes are put on pause until August 15, 2026
-              due to a high security risk.
+            <p className="mt-2 font-bold text-amber-800">
+              The payment gateway is fully operational. You may continue to make payments and manage your account as usual.
             </p>
             <div className="mt-3 flex gap-4">
-              <Link href="/help" className="text-sm font-semibold text-red-700 underline hover:text-red-800">Learn more about the incident</Link>
-              <Link href="/money" className="text-sm font-semibold text-red-700 underline hover:text-red-800">Check your current balance</Link>
+              <Link href="/help" className="text-sm font-semibold text-amber-800 underline hover:text-amber-950">Get help</Link>
+              <Link href="/money" className="text-sm font-semibold text-amber-800 underline hover:text-amber-950">Check your current balance</Link>
             </div>
           </div>
         </div>
