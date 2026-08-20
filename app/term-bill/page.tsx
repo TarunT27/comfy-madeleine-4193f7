@@ -151,6 +151,56 @@ const termDataData: Record<string, any> = {
     payments: [
       { id: 1, desc: "Federal Direct Loan -\nUnsubsidized", amount: "$3,216.00CR" }
     ]
+  },
+  "Summer - 2026": {
+    termTitle: "Summer 2026",
+    dueDate: "TBD",
+    credits: "TBD",
+    holds: "$0.00",
+    totalCharges: "$6,448.00",
+    totalPayments: "$161.00CR",
+    totalBalance: "$6,287.00",
+    showPaymentOptions: true,
+    showPayBillButtons: true,
+    charges: [
+      { id: 1, desc: "TUITION", amount: "$6,266.00" },
+      { id: 2, desc: "STUDENT FEE", amount: "$162.00" },
+      { id: 3, desc: "COURSE FEE", amount: "$20.00" }
+    ],
+    payments: [
+      { id: 1, desc: "FINANCIAL AID - 8/17", amount: "$161.00CR" }
+    ],
+    feesLine: { label: "Tuition & Fees:", amount: "$6,448.00" }
+  },
+  "Fall - 2026": {
+    termTitle: "Fall 2026",
+    dueDate: "TBD",
+    credits: "TBD",
+    holds: "$0.00",
+    totalCharges: "$17,808.48",
+    totalPayments: "$8,781.00CR",
+    totalBalance: "$9,027.48",
+    showPaymentOptions: true,
+    showPayBillButtons: true,
+    charges: [
+      { id: 1, desc: "PRIOR YEAR BALANCE", amount: "$8,288.00" },
+      { id: 2, desc: "TECHNOLOGY FEE", amount: "$221.00" },
+      { id: 3, desc: "PIRG", amount: "$13.01" },
+      { id: 4, desc: "STUDENT FEE", amount: "$1,242.00" },
+      { id: 5, desc: "SCHOOL FEE", amount: "$174.50" },
+      { id: 6, desc: "TUITION", amount: "$7,690.97" },
+      { id: 7, desc: "DIGITAL BOOK CHARGE", amount: "$179.47" }
+    ],
+    payments: [
+      { id: 1, desc: "Federal Direct Loan -\nSubsidized OFFERED", amount: "$414.00CR" },
+      { id: 2, desc: "Federal Direct Loan -\nUnsubsidized OFFERED", amount: "$3,296.00CR" },
+      { id: 3, desc: "PRIOR YEAR AID DSUB - 07/23", amount: "$141.00CR" },
+      { id: 4, desc: "PRIOR YEAR AID DUNSB - 07/23", amount: "$1,899.00CR" },
+      { id: 5, desc: "PRIOR YEAR AID DUNSB - 07/23", amount: "$2,889.00CR" },
+      { id: 6, desc: "PRIOR YEAR AID DSUB - 07/23", amount: "$142.00CR" }
+    ],
+    feesLine: { label: "Tuition & Fees:", amount: "$17,808.48" },
+    insuranceLine: { label: "Student Insurance Premium", amount: "$0.00" }
   }
 };
 
@@ -161,6 +211,7 @@ export default function TermBillPage() {
   const [selectedTermData, setSelectedTermData] = useState<any>(null);
 
   const semesters = [
+    "Fall - 2026",
     "Summer - 2026",
     "Spring - 2026",
     "Winter - 2026",
