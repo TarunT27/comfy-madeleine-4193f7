@@ -66,6 +66,7 @@ export default function DashboardPage() {
   const [scheduleTerm, setScheduleTerm] = useState("Spring 2026");
   const [gradesTerm, setGradesTerm] = useState("Spring 2026");
   const [aidTab, setAidTab] = useState("Award");
+  const [termBillTab, setTermBillTab] = useState<"Fall 2026" | "Summer 2026">("Fall 2026");
   const gradeTermOptions = ["Spring 2026", "Fall 2025", "Spring 2025", "Fall 2024", "Spring 2024", "Fall 2023"];
 
   const [modal, setModal] = useState<string | null>(null);
@@ -86,6 +87,11 @@ export default function DashboardPage() {
   const grades = useMemo(() => (store.demoData ? (gradesData ?? []).filter((g) => g.term === gradesTerm) : []), [store.demoData, gradesData, gradesTerm]);
   const allGrades = useMemo(() => (store.demoData ? gradesData ?? [] : []), [store.demoData, gradesData]);
   const schedules = useMemo(() => (store.demoData ? (coursesData?.schedules ?? []).filter((s) => s.term === scheduleTerm) : []), [store.demoData, coursesData, scheduleTerm]);
+
+  const termBillBalances = {
+    "Fall 2026": 9027.48,
+    "Summer 2026": 6287.0
+  } as const;
 
   const exportCsv = (filename: string, headers: string[], rows: string[][]) => {
     const csv = [headers, ...rows].map((r) => r.map((c) => `"${String(c).replaceAll('"', '""')}"`).join(",")).join("\n");
@@ -175,12 +181,33 @@ export default function DashboardPage() {
           <h2 className="card-title">My Term Bill</h2>
           {store.demoData && moneyData ? (
             <>
-              <div className="mb-4 rounded-xl bg-slate-100 p-4 dark:bg-slate-800">
-                <p className="text-sm text-slate-600 dark:text-slate-400">Current Balance</p>
+              <div className="mb-3 grid grid-cols-2 gap-2">
+                {(["Fall 2026", "Summer 2026"] as const).map((term) => (
+                  <button
+                    key={term}
+                    type="button"
+                    onClick={() => setTermBillTab(term)}
+                    className={`rounded-lg border px-3 py-2 text-sm font-semibold transition-colors ${
+                      termBillTab === term
+                        ? "border-rutgers bg-white text-rutgers"
+                        : "border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    }`}
+                  >
+                    {term}
+                  </button>
+                ))}
+              </div>
+              <div className="mb-4 rounded-xl bg-slate-800 p-4">
+                <p className="text-sm text-slate-400">Current Balance</p>
                 <p className="text-3xl font-bold text-rutgers">
-                  {store.hideMoney ? "$****.**" : `$${moneyData.paymentDue.toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
+                  {store.hideMoney
+                    ? "$****.**"
+                    : `$${termBillBalances[termBillTab].toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                      })}`}
                 </p>
-                <p className="mt-1 text-xs text-slate-500">Due: Spring 2026 Term</p>
+                <p className="mt-1 text-xs text-slate-500">Due: {termBillTab} Term</p>
               </div>
               <Button variant="outline" className="w-full" onClick={() => navigateTo("/term-bill")}>
                 View Full Term Bill
