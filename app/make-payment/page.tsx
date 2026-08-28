@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Info, User } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useFetch } from "@/lib/useFetch";
 import { usePortalStore } from "@/lib/store";
 
 export default function QuikPayMockup() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { demoData } = usePortalStore();
   const { data: moneyData } = useFetch<any>("/api/money", demoData);
   const [activeSidebarTab, setActiveSidebarTab] = useState("Make Payment");
@@ -21,10 +22,16 @@ export default function QuikPayMockup() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
+    const selectedAmount = searchParams.get("amount");
+    if (selectedAmount && !Number.isNaN(Number(selectedAmount))) {
+      setPaymentAmount(Number(selectedAmount).toFixed(2));
+      return;
+    }
+
     if (moneyData?.paymentDue) {
       setPaymentAmount(moneyData.paymentDue.toFixed(2));
     }
-  }, [moneyData]);
+  }, [moneyData, searchParams]);
 
   const sidebarLinks = [
     "Message Board",
@@ -39,7 +46,6 @@ export default function QuikPayMockup() {
 
   return (
     <div className="min-h-screen bg-[#f3f3f3] font-sans text-slate-800">
-      {/* Top Header */}
       <header className="bg-white px-8 py-2 shadow-sm border-b border-red-700 flex justify-between items-center">
         <div className="flex items-center gap-2 text-[#cc0033]">
           <span className="text-4xl font-serif font-bold tracking-tighter">R</span>
@@ -49,24 +55,19 @@ export default function QuikPayMockup() {
           <User className="w-4 h-4 bg-gray-200 text-gray-600 rounded-full" /> Profile
         </div>
       </header>
-      
       <div className="bg-[#cc0033] h-[3px] w-full" />
-
-      {/* Main Content Layout */}
       <div className="flex mx-auto min-h-[800px] border-l border-r border-[#e0e0e0] bg-white max-w-[1400px]">
-        
-        {/* Sidebar */}
         <div className="w-[200px] border-r border-[#e0e0e0] flex flex-col bg-[#fbfbfb]">
           {sidebarLinks.map((link) => (
-            <div 
+            <div
               key={link}
               onClick={() => {
                 setActiveSidebarTab(link);
                 if (link === "Make Payment") setPaymentStep(1);
               }}
               className={`py-6 px-4 text-sm font-medium cursor-pointer transition-colors ${
-                activeSidebarTab === link 
-                  ? 'bg-[#f4e6e8] border-l-4 border-[#cc0033]' 
+                activeSidebarTab === link
+                  ? 'bg-[#f4e6e8] border-l-4 border-[#cc0033]'
                   : 'text-slate-700 hover:bg-slate-100 hover:text-black border-l-4 border-transparent'
               }`}
             >
@@ -74,8 +75,6 @@ export default function QuikPayMockup() {
             </div>
           ))}
         </div>
-
-        {/* Content Area */}
         <div className="flex-1 bg-[#f7f8f9]">
           <div className="p-8">
             {activeSidebarTab === "Make Payment" && (
@@ -104,14 +103,13 @@ export default function QuikPayMockup() {
                       <h2 className="text-[17px] font-bold text-[#005b82]">Paying Student Account Payment</h2>
                       <p className="text-xs text-[#cc0033] mt-1">Required fields are marked with an *</p>
                     </div>
-
                     <div className="p-8 grid grid-cols-2 gap-12">
                       <div>
                         <label className="block text-[13px] text-gray-700 mb-1">Payment Amount <span className="text-[#cc0033]">*</span></label>
                         <div className="flex">
                           <span className="bg-gray-100 border border-gray-300 border-r-0 px-3 py-1 text-gray-600">$</span>
-                          <input 
-                            type="text" 
+                          <input
+                            type="text"
                             className="border border-gray-300 px-3 py-1 w-full bg-[#f8f8f8]"
                             value={paymentAmount}
                             onChange={(e) => setPaymentAmount(e.target.value)}
@@ -125,13 +123,11 @@ export default function QuikPayMockup() {
                         </select>
                       </div>
                     </div>
-
                     <div className="border-t border-dashed border-gray-300 mt-4 text-center py-6 text-[15px]">
                       Total amount to pay: <strong className="text-lg">${paymentAmount}</strong>
                     </div>
-                    
                     <div className="border-t border-dashed border-gray-300 p-6 flex justify-center">
-                      <button 
+                      <button
                         className="bg-[#cc0033] hover:bg-[#aa0022] text-white px-4 py-1.5 font-bold rounded shadow-sm text-[13px]"
                         onClick={() => setPaymentStep(2)}
                       >
@@ -151,12 +147,8 @@ export default function QuikPayMockup() {
                         <div>
                           <h3 className="font-bold text-gray-800 text-[15px] mb-1">Credit / Debit</h3>
                           <p className="text-xs text-gray-500 mb-3">Card transactions for Rutgers University are processed by Nelnet Campus Commerce, USA.</p>
-                          
                           {!showCreditCardForm ? (
-                            <label 
-                              className="flex items-center gap-2 text-[#0070cc] text-sm cursor-pointer hover:underline ml-2"
-                              onClick={() => setShowCreditCardForm(true)}
-                            >
+                            <label className="flex items-center gap-2 text-[#0070cc] text-sm cursor-pointer hover:underline ml-2" onClick={() => setShowCreditCardForm(true)}>
                               <span className="text-xl font-light text-gray-400">+</span> enter new credit / debit information
                             </label>
                           ) : (
@@ -180,31 +172,25 @@ export default function QuikPayMockup() {
                                 <input type="text" className="w-[80%] border border-gray-300 px-3 py-1.5 text-sm" placeholder="Name on card" />
                               </div>
                               <div className="pt-2">
-                                <button 
-                                  className="bg-[#cc0033] hover:bg-[#aa0022] text-white px-4 py-1.5 font-bold rounded shadow-sm text-[13px]"
-                                  onClick={() => setPaymentStep(3)}
-                                >
+                                <button className="bg-[#cc0033] hover:bg-[#aa0022] text-white px-4 py-1.5 font-bold rounded shadow-sm text-[13px]" onClick={() => setPaymentStep(3)}>
                                   Confirm & Continue
                                 </button>
-                                <button 
-                                  className="ml-3 text-sm text-gray-500 hover:text-gray-700 hover:underline"
-                                  onClick={() => setShowCreditCardForm(false)}
-                                >
+                                <button className="ml-3 text-sm text-gray-500 hover:text-gray-700 hover:underline" onClick={() => setShowCreditCardForm(false)}>
                                   Cancel
                                 </button>
                               </div>
                             </div>
                           )}
                         </div>
-                        
+
                         <div>
                           <h3 className="font-bold text-gray-800 text-[15px] mb-2">eCheck</h3>
                           <div className="space-y-3 ml-2">
                             <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                              <input 
-                                type="radio" 
-                                name="payment_method" 
-                                className="w-3.5 h-3.5" 
+                              <input
+                                type="radio"
+                                name="payment_method"
+                                className="w-3.5 h-3.5"
                                 checked={selectedPaymentId === "madhavi-td"}
                                 onChange={() => {
                                   setSelectedPaymentId("madhavi-td");
@@ -214,10 +200,9 @@ export default function QuikPayMockup() {
                               />
                               Madhavi TD Account ( CHECKING ending with 3464 )
                             </label>
-
                             {selectedPaymentId === "madhavi-td" && !showECheckForm && (
                               <div className="ml-5 mt-2">
-                                <button 
+                                <button
                                   className="bg-[#cc0033] hover:bg-[#aa0022] text-white px-4 py-1.5 font-bold rounded shadow-sm text-[13px] disabled:opacity-50 disabled:cursor-not-allowed"
                                   disabled={isProcessing}
                                   onClick={() => {
@@ -232,9 +217,8 @@ export default function QuikPayMockup() {
                                 </button>
                               </div>
                             )}
-                            
                             {!showECheckForm ? (
-                              <label 
+                              <label
                                 className="flex items-center gap-2 text-[#0070cc] text-sm cursor-pointer hover:underline"
                                 onClick={() => {
                                   setShowECheckForm(true);
@@ -248,10 +232,10 @@ export default function QuikPayMockup() {
                                 <div className="grid grid-cols-2 gap-4">
                                   <div>
                                     <label className="block text-xs font-bold text-gray-700 mb-1">Routing Number</label>
-                                    <input 
-                                      type="text" 
-                                      className={`w-full border ${routingError ? 'border-red-500 bg-red-50' : 'border-gray-300'} px-3 py-1.5 text-sm`} 
-                                      placeholder="9 digits" 
+                                    <input
+                                      type="text"
+                                      className={`w-full border ${routingError ? 'border-red-500 bg-red-50' : 'border-gray-300'} px-3 py-1.5 text-sm`}
+                                      placeholder="9 digits"
                                       value={routingNumber}
                                       onChange={(e) => {
                                         const val = e.target.value.replace(/\D/g, '').slice(0, 9);
@@ -280,7 +264,7 @@ export default function QuikPayMockup() {
                                   </div>
                                 </div>
                                 <div className="pt-2">
-                                  <button 
+                                  <button
                                     className="bg-[#cc0033] hover:bg-[#aa0022] text-white px-4 py-1.5 font-bold rounded shadow-sm text-[13px] disabled:opacity-50 disabled:cursor-not-allowed"
                                     disabled={isProcessing}
                                     onClick={() => {
@@ -298,7 +282,7 @@ export default function QuikPayMockup() {
                                     {isProcessing ? "Processing..." : "Confirm & Continue"}
                                   </button>
                                   {!isProcessing && (
-                                    <button 
+                                    <button
                                       className="ml-3 text-sm text-gray-500 hover:text-gray-700 hover:underline"
                                       onClick={() => {
                                         setShowECheckForm(false);
@@ -318,31 +302,19 @@ export default function QuikPayMockup() {
                         <div>
                           <h3 className="font-bold text-gray-800 text-[15px] mb-3 flex items-center gap-1">International Payments <Info className="w-4 h-4 text-[#0070cc] bg-[#d5efff] rounded-full" /></h3>
                           <div className="space-y-3 ml-2">
-                            <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                              <input type="radio" name="payment_method" className="w-3.5 h-3.5" />
-                              Flywire
-                            </label>
-                            <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                              <input type="radio" name="payment_method" className="w-3.5 h-3.5" />
-                              CIBC International Student Pay
-                            </label>
+                            <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"><input type="radio" name="payment_method" className="w-3.5 h-3.5" />Flywire</label>
+                            <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"><input type="radio" name="payment_method" className="w-3.5 h-3.5" />CIBC International Student Pay</label>
                           </div>
                         </div>
                       </div>
-
-                      {/* Info Box */}
                       <div>
                         <div className="border border-[#75bfe0] rounded-sm bg-[#f2fafd] p-4 text-sm relative overflow-hidden">
-                          <h4 className="flex items-center gap-2 text-[#005b82] font-bold mb-3">
-                            <Info className="w-4 h-4" /> Payment Method Disclosure:
-                          </h4>
+                          <h4 className="flex items-center gap-2 text-[#005b82] font-bold mb-3"><Info className="w-4 h-4" /> Payment Method Disclosure:</h4>
                           <p className="text-[#0070cc] mb-3">The following service fees apply to Student Account Payment:</p>
                           <ul className="list-disc pl-5 text-[#0070cc] space-y-1">
                             <li>Domestic Credit / Debit Card - 2.40%</li>
                             <li>International Credit / Debit Card - 4.00%</li>
                           </ul>
-
-                          {/* Loading Overlay */}
                           {isProcessing && (
                             <div className="absolute inset-0 bg-white/90 z-50 flex flex-col items-center justify-center">
                               <div className="w-10 h-10 border-4 border-[#cc0033] border-t-transparent rounded-full animate-spin mb-3"></div>
@@ -353,20 +325,9 @@ export default function QuikPayMockup() {
                         </div>
                       </div>
                     </div>
-
                     <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-200">
-                      <button 
-                        className="text-gray-600 hover:underline text-sm font-bold"
-                        onClick={() => setPaymentStep(1)}
-                      >
-                        Modify Payment Amount
-                      </button>
-                      <button 
-                        className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-2 font-bold rounded border border-gray-300 shadow-sm text-sm"
-                        onClick={() => setPaymentStep(1)}
-                      >
-                        Back
-                      </button>
+                      <button className="text-gray-600 hover:underline text-sm font-bold" onClick={() => setPaymentStep(1)}>Modify Payment Amount</button>
+                      <button className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-2 font-bold rounded border border-gray-300 shadow-sm text-sm" onClick={() => setPaymentStep(1)}>Back</button>
                     </div>
                   </div>
                 )}
@@ -382,7 +343,6 @@ export default function QuikPayMockup() {
                         <p className="font-bold text-gray-800 mb-1">Thank you for your payment.</p>
                         <p className="text-sm text-gray-600">Your transaction has been approved and successfully processed. A confirmation email has been sent to your registered academic email address.</p>
                       </div>
-
                       <div className="bg-[#fff9e6] border border-[#ffeeba] p-4 rounded-sm flex gap-3 items-start">
                         <Info className="w-5 h-5 text-[#856404] mt-0.5 flex-shrink-0" />
                         <div className="text-[13px] text-[#856404] leading-relaxed">
@@ -393,39 +353,23 @@ export default function QuikPayMockup() {
                           </ul>
                         </div>
                       </div>
-
                       <div className="bg-[#f8f8f8] border border-gray-200 p-5 rounded-sm">
                         <div className="grid grid-cols-[150px_1fr] gap-3 text-sm">
                           <div className="text-gray-500 font-bold">Confirmation #:</div>
                           <div className="font-mono text-[#0070cc]">1003{Math.floor(100000 + Math.random() * 900000)}</div>
-
                           <div className="text-gray-500 font-bold">Date:</div>
                           <div>04/13/2026</div>
-
                           <div className="text-gray-500 font-bold">Amount Paid:</div>
                           <div className="font-bold text-[#cc0033]">${paymentAmount}</div>
-
                           <div className="text-gray-500 font-bold">Account:</div>
                           <div>Tuition and Fees</div>
-
                           <div className="text-gray-500 font-bold">Payment Method:</div>
                           <div>CREDIT CARD</div>
                         </div>
                       </div>
-
                       <div className="border-t border-dashed border-gray-300 pt-6 flex gap-4">
-                        <button 
-                          className="bg-[#0070cc] hover:bg-[#005fb0] text-white px-5 py-2 font-bold rounded shadow-sm text-sm"
-                          onClick={() => setActiveSidebarTab("Transaction History")}
-                        >
-                          View Transaction History
-                        </button>
-                        <button 
-                          className="border border-[#0070cc] text-[#0070cc] hover:bg-blue-50 px-5 py-2 font-bold rounded shadow-sm text-sm"
-                          onClick={() => router.push('/term-bill')}
-                        >
-                          Return to Student Account
-                        </button>
+                        <button className="bg-[#0070cc] hover:bg-[#005fb0] text-white px-5 py-2 font-bold rounded shadow-sm text-sm" onClick={() => setActiveSidebarTab("Transaction History")}>View Transaction History</button>
+                        <button className="border border-[#0070cc] text-[#0070cc] hover:bg-blue-50 px-5 py-2 font-bold rounded shadow-sm text-sm" onClick={() => router.push('/term-bill')}>Return to Student Account</button>
                       </div>
                     </div>
                   </div>
@@ -435,21 +379,12 @@ export default function QuikPayMockup() {
 
             {activeSidebarTab === "Transaction History" && (
               <div className="max-w-[1100px] mx-auto">
-                <div className="mb-4">
-                  <h1 className="text-2xl font-light text-[#0070cc]">Online Transaction History</h1>
-                </div>
-                
+                <div className="mb-4"><h1 className="text-2xl font-light text-[#0070cc]">Online Transaction History</h1></div>
                 <div className="bg-white border border-gray-200 shadow-sm overflow-hidden">
                   <table className="w-full text-sm text-left">
                     <thead className="bg-white text-gray-600 border-b border-gray-200 uppercase text-xs font-bold">
                       <tr>
-                        <th className="py-3 px-4">CONFIRMATION #</th>
-                        <th className="py-3 px-4">DATE</th>
-                        <th className="py-3 px-4">AMOUNT</th>
-                        <th className="py-3 px-4">ACCOUNT</th>
-                        <th className="py-3 px-4">PAYMENT METHOD</th>
-                        <th className="py-3 px-4 whitespace-nowrap flex items-center gap-1">PAYMENT STATUS <Info className="w-3 h-3 text-[#0070cc] rounded-full" /></th>
-                        <th className="py-3 px-4">PAYER</th>
+                        <th className="py-3 px-4">CONFIRMATION #</th><th className="py-3 px-4">DATE</th><th className="py-3 px-4">AMOUNT</th><th className="py-3 px-4">ACCOUNT</th><th className="py-3 px-4">PAYMENT METHOD</th><th className="py-3 px-4 whitespace-nowrap flex items-center gap-1">PAYMENT STATUS <Info className="w-3 h-3 text-[#0070cc] rounded-full" /></th><th className="py-3 px-4">PAYER</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
@@ -462,16 +397,10 @@ export default function QuikPayMockup() {
                         { conf: "1001655293", date: "12/15/2023", amt: "$1,861.34", acc: "Student Accounts Payment Plan", method: "CHECKING", status: "Accepted", payer: "TARUN TATA" },
                         { conf: "1001986912", date: "12/07/2023", amt: "$2,722.00", acc: "Tuition and Fees", method: "CHECKING", status: "Accepted", payer: "TARUN TATA" },
                         { conf: "1001655292", date: "11/15/2023", amt: "$1,861.34", acc: "Student Accounts Payment Plan", method: "CHECKING", status: "Accepted", payer: "TARUN TATA" },
-                        { conf: "1001655290", date: "10/16/2023", amt: "$1,396.01", acc: "Student Accounts Payment Plan", method: "CHECKING", status: "Accepted", payer: "TARUN TATA" },
+                        { conf: "1001655290", date: "10/16/2023", amt: "$1,396.01", acc: "Student Accounts Payment Plan", method: "CHECKING", status: "Accepted", payer: "TARUN TATA" }
                       ].map((row, i) => (
                         <tr key={i} className={`hover:bg-blue-50 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}`}>
-                          <td className="py-3 px-4 text-[#0070cc] hover:underline cursor-pointer">{row.conf}</td>
-                          <td className="py-3 px-4">{row.date}</td>
-                          <td className="py-3 px-4">{row.amt}</td>
-                          <td className="py-3 px-4">{row.acc}</td>
-                          <td className="py-3 px-4">{row.method}</td>
-                          <td className="py-3 px-4">{row.status}</td>
-                          <td className="py-3 px-4">{row.payer}</td>
+                          <td className="py-3 px-4 text-[#0070cc] hover:underline cursor-pointer">{row.conf}</td><td className="py-3 px-4">{row.date}</td><td className="py-3 px-4">{row.amt}</td><td className="py-3 px-4">{row.acc}</td><td className="py-3 px-4">{row.method}</td><td className="py-3 px-4">{row.status}</td><td className="py-3 px-4">{row.payer}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -480,7 +409,6 @@ export default function QuikPayMockup() {
               </div>
             )}
 
-            {/* Placeholder for other tabs */}
             {activeSidebarTab !== "Make Payment" && activeSidebarTab !== "Transaction History" && (
               <div className="max-w-4xl mx-auto">
                 <h1 className="text-2xl font-light text-[#0070cc] mb-8 border-b border-gray-300 pb-2">{activeSidebarTab}</h1>
@@ -490,13 +418,9 @@ export default function QuikPayMockup() {
           </div>
         </div>
       </div>
-
       <footer className="border-t border-gray-300 mt-2 bg-white text-xs text-slate-500 py-6 px-8 flex justify-end gap-2">
         <div className="flex flex-col items-end max-w-6xl">
-          <div className="flex gap-2 text-[#0070cc] mb-2">
-            <a href="#" className="hover:underline">Contact Us</a> | 
-            <a href="#" className="hover:underline">Privacy Policy</a>
-          </div>
+          <div className="flex gap-2 text-[#0070cc] mb-2"><a href="#" className="hover:underline">Contact Us</a> | <a href="#" className="hover:underline">Privacy Policy</a></div>
           <p>QuikPAY is a registered trademark of Nelnet Business Solutions, Inc. Version 2025.2.7</p>
           <p>© 2026 Nelnet, Inc. and Affiliates. All Rights Reserved.</p>
         </div>
