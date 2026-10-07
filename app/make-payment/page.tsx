@@ -1,12 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { Info, User } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useFetch } from "@/lib/useFetch";
 import { usePortalStore } from "@/lib/store";
 
-export default function QuikPayMockup() {
+export default function MakePaymentPage() {
+  return (
+    <Suspense fallback={null}>
+      <QuikPayMockup />
+    </Suspense>
+  );
+}
+
+function QuikPayMockup() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { demoData } = usePortalStore();
