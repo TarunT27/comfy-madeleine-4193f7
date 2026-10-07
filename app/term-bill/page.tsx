@@ -104,20 +104,17 @@ const termDataData: Record<string, any> = {
   },
   "Summer - 2026": {
     termTitle: "Summer 2026", dueDate: "TBD", credits: "TBD", holds: "$0.00",
-    totalCharges: "$10,015.00", totalPayments: "$3,728.00CR", totalBalance: "$6,287.00",
+    totalCharges: "$6,448.00", totalPayments: "$161.00CR", totalBalance: "$6,287.00",
     showPaymentOptions: true, showPayBillButtons: true,
     charges: [
       { id: 1, desc: "TUITION", amount: "$6,266.00" },
       { id: 2, desc: "STUDENT FEE", amount: "$162.00" },
-      { id: 3, desc: "COURSE FEE", amount: "$20.00" },
-      { id: 4, desc: "PRIOR YEAR BALANCE", amount: "$3,567.00" }
+      { id: 3, desc: "COURSE FEE", amount: "$20.00" }
     ],
     payments: [
-      { id: 1, desc: "FINANCIAL AID - 8/17", amount: "$161.00CR" },
-      { id: 2, desc: "PRIOR YEAR AID", amount: "$2,000.00CR" },
-      { id: 3, desc: "PRIOR YEAR AID", amount: "$1,567.00CR" }
+      { id: 1, desc: "FINANCIAL AID - 8/17", amount: "$161.00CR" }
     ],
-    feesLine: { label: "Tuition & Fees:", amount: "$10,015.00" }
+    feesLine: { label: "Tuition & Fees:", amount: "$6,448.00" }
   },
   "Fall - 2026": {
     termTitle: "Fall 2026", dueDate: "TBD", credits: "TBD", holds: "$0.00",
