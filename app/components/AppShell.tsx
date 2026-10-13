@@ -29,7 +29,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const { demoData, setDemoData, addBookmark, addNote, addReminder, sidebarCollapsed } = usePortalStore();
   const { push } = useToast();
 
-  const [warningOpen, setWarningOpen] = useState(true);
   const [quickAddOpen, setQuickAddOpen] = useState(false);
   const [mode, setMode] = useState<"reminder" | "note" | "bookmark">("reminder");
   const [f1, setF1] = useState("");
@@ -90,23 +89,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           <main className={`p-6 ${sidebarCollapsed ? "max-w-7xl" : "max-w-[1600px]"}`}>{children}</main>
         </div>
       </div>
-
-      <Dialog open={warningOpen} onClose={() => setWarningOpen(false)} title="Service Notice">
-        <div className="space-y-4">
-          <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-950">
-            <p className="mb-2 font-bold">Dashboard availability notice</p>
-            <p>
-              Some dashboard features may be temporarily unavailable or may not display correctly while maintenance is completed.
-            </p>
-            <p className="mt-2 text-sm">
-              <strong>The payment gateway is fully operational.</strong> You may continue to make payments and manage your account as usual.
-            </p>
-          </div>
-          <div className="flex justify-end">
-            <Button onClick={() => setWarningOpen(false)}>I Understand</Button>
-          </div>
-        </div>
-      </Dialog>
 
       <Dialog open={quickAddOpen} onClose={() => setQuickAddOpen(false)} title="Quick Add">
         <div className="mb-2 flex gap-2">

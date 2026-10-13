@@ -118,26 +118,25 @@ const termDataData: Record<string, any> = {
   },
   "Fall - 2026": {
     termTitle: "Fall 2026", dueDate: "TBD", credits: "TBD", holds: "$0.00",
-    totalCharges: "$17,808.48", totalPayments: "$8,781.00CR", totalBalance: "$9,027.48",
+    totalCharges: "$17,723.68", totalPayments: "$8,781.00CR", totalBalance: "$8,942.68",
     showPaymentOptions: true, showPayBillButtons: true,
     charges: [
       { id: 1, desc: "PRIOR YEAR BALANCE", amount: "$8,288.00" },
       { id: 2, desc: "TECHNOLOGY FEE", amount: "$221.00" },
-      { id: 3, desc: "PIRG", amount: "$13.01" },
-      { id: 4, desc: "STUDENT FEE", amount: "$1,242.00" },
-      { id: 5, desc: "SCHOOL FEE", amount: "$174.50" },
-      { id: 6, desc: "TUITION", amount: "$7,690.97" },
-      { id: 7, desc: "DIGITAL BOOK CHARGE", amount: "$179.47" }
+      { id: 3, desc: "STUDENT FEE", amount: "$1,242.00" },
+      { id: 4, desc: "SCHOOL FEE", amount: "$174.50" },
+      { id: 5, desc: "TUITION", amount: "$7,690.50" },
+      { id: 6, desc: "DIGITAL BOOK CHARGE", amount: "$107.68" }
     ],
     payments: [
-      { id: 1, desc: "Federal Direct Loan -\nSubsidized OFFERED", amount: "$414.00CR" },
-      { id: 2, desc: "Federal Direct Loan -\nUnsubsidized OFFERED", amount: "$3,296.00CR" },
+      { id: 1, desc: "Federal Direct Loan - Unsubsidized", amount: "$3,296.00CR" },
+      { id: 2, desc: "Federal Direct Loan - Subsidized", amount: "$414.00CR" },
       { id: 3, desc: "PRIOR YEAR AID DSUB - 07/23", amount: "$141.00CR" },
       { id: 4, desc: "PRIOR YEAR AID DUNSB - 07/23", amount: "$1,899.00CR" },
       { id: 5, desc: "PRIOR YEAR AID DUNSB - 07/23", amount: "$2,889.00CR" },
       { id: 6, desc: "PRIOR YEAR AID DSUB - 07/23", amount: "$142.00CR" }
     ],
-    feesLine: { label: "Tuition & Fees:", amount: "$17,808.48" },
+    feesLine: { label: "Tuition & Fees:", amount: "$17,723.68" },
     insuranceLine: { label: "Student Insurance Premium", amount: "$0.00" }
   }
 };
@@ -171,10 +170,6 @@ export default function TermBillPage() {
 
   return (
     <div className="min-h-screen bg-[#f3f3f3] font-sans">
-      <div className="sticky top-0 z-50 bg-amber-600 px-8 py-3 text-center font-bold text-white">
-        SERVICE NOTICE: Some dashboard features may be temporarily unavailable or may not display correctly while maintenance is completed. The payment gateway is fully operational.
-      </div>
-
       <header className="bg-[#cc0033] px-8 py-4 text-white shadow-md">
         <div className="mx-auto flex max-w-6xl items-center gap-6">
           <div className="flex items-center gap-2">
