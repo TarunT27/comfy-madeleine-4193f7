@@ -103,7 +103,7 @@ const termDataData: Record<string, any> = {
     ]
   },
   "Spring - 2026": {
-    termTitle: "Spring 2026", dueDate: "TBD", credits: "TBD", holds: "$0.00",
+    termTitle: "Spring 2026", dueDate: "TBD", credits: "TBD", holds: "$8,942.68",
     totalCharges: "$4,755.00", totalPayments: "$4,755.00CR", totalBalance: "$0.00",
     charges: [
       { id: 1, desc: "TECHNOLOGY FEE", amount: "$182.00" },
