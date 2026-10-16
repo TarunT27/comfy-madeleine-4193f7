@@ -102,6 +102,24 @@ const termDataData: Record<string, any> = {
       { id: 3, desc: "Federal Direct Loan -\nUnsubsidized", amount: "$3,216.00CR" }
     ]
   },
+  "Spring - 2026": {
+    termTitle: "Spring 2026", dueDate: "TBD", credits: "TBD", holds: "$0.00",
+    totalCharges: "$4,755.00", totalPayments: "$4,755.00CR", totalBalance: "$0.00",
+    charges: [
+      { id: 1, desc: "TECHNOLOGY FEE", amount: "$182.00" },
+      { id: 2, desc: "PIRG", amount: "$6.50" },
+      { id: 3, desc: "STUDENT FEE", amount: "$342.50" },
+      { id: 4, desc: "SCHOOL FEE", amount: "$93.00" },
+      { id: 5, desc: "TUITION", amount: "$4,131.00" }
+    ],
+    payments: [
+      { id: 1, desc: "TERM BILL PAYMENT - 03/09", amount: "$1,724.00CR" },
+      { id: 2, desc: "Federal Direct Loan - Subsidized", amount: "$142.00CR" },
+      { id: 3, desc: "Federal Direct Loan - Unsubsidized", amount: "$2,889.00CR" }
+    ],
+    feesLine: { label: "Tuition & Fees:", amount: "$4,755.00" },
+    insuranceLine: { label: "Student Insurance Premium", amount: "$0.00" }
+  },
   "Summer - 2026": {
     termTitle: "Summer 2026", dueDate: "TBD", credits: "TBD", holds: "$0.00",
     totalCharges: "$6,448.00", totalPayments: "$6,448.00CR", totalBalance: "$0.00",
@@ -149,7 +167,7 @@ export default function TermBillPage() {
   const [selectedTermData, setSelectedTermData] = useState<any>(null);
 
   const semesters = [
-    "Fall - 2026", "Summer - 2026", "Winter - 2026", "Fall - 2025",
+    "Fall - 2026", "Summer - 2026", "Spring - 2026", "Winter - 2026", "Fall - 2025",
     "Spring - 2025", "Fall - 2024", "Spring - 2024", "Fall - 2023",
     "Spring - 2023", "Fall - 2022"
   ];
