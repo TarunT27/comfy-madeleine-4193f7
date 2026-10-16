@@ -104,15 +104,16 @@ const termDataData: Record<string, any> = {
   },
   "Summer - 2026": {
     termTitle: "Summer 2026", dueDate: "TBD", credits: "TBD", holds: "$0.00",
-    totalCharges: "$6,448.00", totalPayments: "$161.00CR", totalBalance: "$6,287.00",
+    totalCharges: "$6,448.00", totalPayments: "$6,448.00CR", totalBalance: "$0.00",
     showPaymentOptions: true, showPayBillButtons: true,
     charges: [
-      { id: 1, desc: "TUITION", amount: "$6,266.00" },
-      { id: 2, desc: "STUDENT FEE", amount: "$162.00" },
-      { id: 3, desc: "COURSE FEE", amount: "$20.00" }
+      { id: 1, desc: "Tuition", amount: "$6,266.00" },
+      { id: 2, desc: "Student Fee", amount: "$162.00" },
+      { id: 3, desc: "Course Fee", amount: "$20.00" }
     ],
     payments: [
-      { id: 1, desc: "FINANCIAL AID - 8/17", amount: "$161.00CR" }
+      { id: 1, desc: "ECHECK PAYMENT - 10/12", amount: "$6,287.00CR" },
+      { id: 2, desc: "FINANCIAL AID - 8/17", amount: "$161.00CR" }
     ],
     feesLine: { label: "Tuition & Fees:", amount: "$6,448.00" }
   },
@@ -269,7 +270,7 @@ export default function TermBillPage() {
                       <div className="grid grid-cols-2 text-[13px] font-bold text-black border-b border-slate-300 pb-2 mb-2"><div>Charges</div><div className="text-center">Payments / Account Credits</div></div>
                       <div className="flex gap-4 min-h-[140px]">
                         <div className="flex-1 space-y-1 text-[13px]">
-                          {selectedTermData.charges.map((c: any) => <div key={c.id} className="flex justify-between text-slate-700"><span className="uppercase">{c.desc}</span><span className="text-right">{c.amount}</span></div>)}
+                          {selectedTermData.charges.map((c: any) => <div key={c.id} className="flex justify-between text-slate-700"><span>{c.desc}</span><span className="text-right">{c.amount}</span></div>)}
                         </div>
                         <div className="flex-1 space-y-1 text-[13px]">
                           {selectedTermData.payments.map((p: any) => <div key={p.id} className="flex justify-between text-slate-700 items-start"><span className="whitespace-pre-line leading-tight">{p.desc}</span><span className="text-right">{p.amount}</span></div>)}
