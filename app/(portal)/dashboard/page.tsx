@@ -89,8 +89,8 @@ export default function DashboardPage() {
   const schedules = useMemo(() => (store.demoData ? (coursesData?.schedules ?? []).filter((s) => s.term === scheduleTerm) : []), [store.demoData, coursesData, scheduleTerm]);
 
   const termBillBalances = {
-    "Fall 2026": 9027.48,
-    "Summer 2026": 6287.0
+    "Fall 2026": 8942.68,
+    "Summer 2026": 0
   } as const;
 
   const exportCsv = (filename: string, headers: string[], rows: string[][]) => {
